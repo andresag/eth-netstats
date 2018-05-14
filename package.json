@@ -7,9 +7,6 @@
     "node": "0.12.0",
     "npm": "2.5.1"
   },
-  "scripts": {
-    "start": "node ./bin/www"
-  },
   "dependencies": {
     "body-parser": "1.13.3",
     "chalk": "1.1.1",
@@ -33,17 +30,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cubedro/eth-netstats.git"
+    "url": "https://github.com/esanchma/eth-netstats.git"
   },
-  "homepage": "https://github.com/cubedro/eth-netstats",
+  "homepage": "https://github.com/esanchma/eth-netstats",
   "bugs": {
-    "url": "https://github.com/cubedro/eth-netstats/issues"
+    "url": "https://github.com/esanchma/eth-netstats/issues"
   },
   "authors": [
     {
       "name": "Marian Oancea",
       "email": "marian@ethdev.com",
       "url": "https://github.com/cubedro"
+    },{
+      "name": "Eduardo Sánchez",
+      "email": "esanchma@everis.com",
+      "url": "https://gihub.com/esanchma"
     }
   ],
   "license": "LGPL-3.0",
