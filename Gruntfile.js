@@ -1,3 +1,8 @@
+'use strict';
+
+const path = require('path')
+
+
 var src = 'src/';
 var dest = 'dist/';
 
@@ -142,12 +147,8 @@ module.exports = function(grunt) {
 		}
 	});
 
-	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-jade');
-	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
+	// load all grunt tasks
+	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-	grunt.registerTask('default', ['clean:build', 'clean:cleanup_js', 'clean:cleanup_css', 'jade:build', 'copy:build', 'cssmin:build', 'concat:vendor', 'concat:scripts', 'uglify:app', 'concat:netstats', 'concat:css', 'clean:cleanup_js', 'clean:cleanup_css']);
-};
+	grunt.registerTask('default', ['clean:build', 'clean:cleanup_js', 'clean:cleanup_css', 'jade:build', 'copy:build', 'cssmin:build', 'concat:vendor', 'concat:scripts', 'uglify:app', 'concat:netstats', 'concat:css']);
+}
