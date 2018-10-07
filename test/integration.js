@@ -2,13 +2,7 @@
 const nodes = require('./nodes').directories()
 const cluster = require('cluster')
 const _ = require('lodash')
-const ondeath = require('death')
-const fs = require('fs')
 require('dotenv').config()
-
-ondeath(function () {
-  fs.readdirSync('.').filter((item) => { return item.startsWith('.node-xmlhttprequest') }).forEach((file) => fs.unlinkSync(file))
-})
 
 let nodeSample = _.shuffle(nodes)
 
