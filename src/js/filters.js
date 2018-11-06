@@ -211,6 +211,28 @@ angular.module('netStatsApp.filters', [])
 		return hash.substr(0, 8) + '...' + hash.substr(56, 8);
 	}
 })
+.filter('validatorFilter', function() {
+	return function(hash) {
+		if(typeof hash === 'undefined')
+			return "?";
+
+		if(hash.substr(0,2) === '0x')
+			hash = "Val"
+
+		return hash;
+	}
+})
+.filter('proposerFilter', function() {
+	return function(hash) {
+		if(typeof hash === 'undefined')
+			return "?";
+
+		if(hash.substr(0,2) === '0x')
+			hash = "Prop"
+
+		return hash;
+	}
+})
 .filter('timeClass', function() {
 	return function(timestamp, active) {
 		if( ! active)

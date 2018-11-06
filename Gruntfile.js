@@ -66,7 +66,7 @@ module.exports = function (grunt) {
           {
             expand: true,
             cwd: 'src/images/',
-            src: ['*.ico'],
+            src: ['*.ico', '*.png'],
             dest: 'dist/',
             filter: 'isFile'
           },

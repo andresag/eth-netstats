@@ -4,6 +4,10 @@ var http = require('http')
 
 // Init WS SECRET
 var WS_SECRET
+var ranking = {}
+setInterval(function(){ 
+   ranking = {}   
+}, 86400000);
 
 if (!_.isUndefined(process.env.WS_SECRET) && !_.isNull(process.env.WS_SECRET)) {
   if (process.env.WS_SECRET.indexOf('|') > 0) {
@@ -150,7 +154,15 @@ api.on('connection', function (spark) {
               action: 'block',
               data: stats
             })
-
+            if(ranking[data.block['validator']] === undefined){
+                ranking[data.block['validator']] = {
+                  name: data.id,
+                  catchUp: 0
+                  
+                };
+            } else {
+              ranking[data.block['validator']]['name'] = data.id;
+            }
             console.debug('API', 'BLK', 'Block:', data.block['number'], 'from:', data.id)
 
             Nodes.getCharts()
@@ -200,6 +212,29 @@ api.on('connection', function (spark) {
         }
       })
     } else {
+      var obj = JSON.parse(data.catchUp);
+      
+      if (ranking[obj.Data.NewProposer] !== undefined) {
+        ranking[obj.Data.NewProposer]['catchUp'] += 1;
+      } else {
+        ranking[obj.Data.NewProposer] = {
+          name: 'undefined',
+          catchUp: 1
+        }
+      }
+       var sendRanking = {};
+
+       Object.keys(ranking).forEach(function(element) {
+
+        sendRanking[ranking[element]['name']] = ranking[element]['catchUp']
+        
+      });
+      
+      client.write({
+        action: 'errorNode',
+        data: ranking
+      })
+     
       console.error('API', 'STA', 'Stats error:', data)
     }
   })
