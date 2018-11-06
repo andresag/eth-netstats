@@ -4,10 +4,9 @@
 netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, socket, _, toastr) {
 
 	var MAX_BINS = 40;
-
 	// Main Stats init
 	// ---------------
-
+	$scope.errorNode = {};
 	$scope.frontierHash = '0x11bbe8db4e347b4e8c937c1c8370e4b5ed33adb3db69cbdb7a38e1e50b1b82fa';
 	$scope.nodesTotal = 0;
 	$scope.nodesActive = 0;
@@ -325,6 +324,19 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 
 				break;
 
+			case "errorNode":
+
+			  $scope.errorNodes = [];
+
+			  Object.keys(data).forEach(function(element) {
+				$scope.errorNodes.push({
+					name: data[element]['name'],
+					catchUp: data[element]['catchUp'].length
+				});
+			   			   
+			 });
+				break;				
+
 			case "charts":
 				if( !_.isEqual($scope.avgBlockTime, data.avgBlocktime) )
 					$scope.avgBlockTime = data.avgBlocktime;
@@ -492,7 +504,7 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 
 		$scope.map = _.map($scope.nodes, function (node) {
 			var fill = $filter('bubbleClass')(node.stats, $scope.bestBlock);
-
+			
 			if(node.geo != null)
 				return {
 					radius: 3,
