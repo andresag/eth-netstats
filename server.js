@@ -5,9 +5,14 @@ var http = require('http')
 // Init WS SECRET
 var WS_SECRET
 var ranking = {}
-setInterval(function(){ 
-   ranking = {}   
-}, 86400000);
+setInterval(function(){
+   var d = new Date((new Date()) - 3600000 * 24);
+   Object.keys(ranking).forEach(function(element) {
+     while (ranking[element]['catchUp'].length > 0 && ranking[element]['catchUp'][0] < d){
+      ranking[element]['catchUp'].shift();
+     }
+   });
+}, 300000);
 
 if (!_.isUndefined(process.env.WS_SECRET) && !_.isNull(process.env.WS_SECRET)) {
   if (process.env.WS_SECRET.indexOf('|') > 0) {
@@ -157,7 +162,7 @@ api.on('connection', function (spark) {
             if(ranking[data.block['validator']] === undefined){
                 ranking[data.block['validator']] = {
                   name: data.id,
-                  catchUp: 0
+                  catchUp: []
                   
                 };
             } else {
@@ -213,13 +218,12 @@ api.on('connection', function (spark) {
       })
     } else {
       var obj = JSON.parse(data.catchUp);
-      
       if (ranking[obj.Data.NewProposer] !== undefined) {
-        ranking[obj.Data.NewProposer]['catchUp'] += 1;
+        ranking[obj.Data.NewProposer]['catchUp'].push(new Date());
       } else {
         ranking[obj.Data.NewProposer] = {
           name: 'undefined',
-          catchUp: 1
+          catchUp: [new Date()]
         }
       }
        var sendRanking = {};

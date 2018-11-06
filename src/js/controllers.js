@@ -331,7 +331,7 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 			  Object.keys(data).forEach(function(element) {
 				$scope.errorNodes.push({
 					name: data[element]['name'],
-					catchUp: data[element]['catchUp']
+					catchUp: data[element]['catchUp'].length
 				});
 			   			   
 			 });
