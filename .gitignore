@@ -1,5 +1,6 @@
 .DS_Store
 */**/.DS_Store
+.idea/
 node_modules
 dist
 dist-lite
@@ -14,4 +15,3 @@ ws_secret.json
 stats.json
 .vscode
 .env
-.idea
