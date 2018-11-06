@@ -226,13 +226,6 @@ api.on('connection', function (spark) {
           catchUp: [new Date()]
         }
       }
-       var sendRanking = {};
-
-       Object.keys(ranking).forEach(function(element) {
-
-        sendRanking[ranking[element]['name']] = ranking[element]['catchUp']
-        
-      });
       
       client.write({
         action: 'errorNode',
