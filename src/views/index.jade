@@ -171,8 +171,10 @@ block content
               i.icon-clock(data-toggle="tooltip", data-placement="top", title="Node latency", ng-click="orderTable(['stats.latency'], false)")
             th
               i.icon-mining(data-toggle="tooltip", data-placement="top", title="Is mining", ng-click="orderTable(['-stats.hashrate', 'stats.block.validator', 'stats.block.proposer'], false)")
-              th
-              th
+            th
+              i.icon-hammer(data-toggle="tooltip", data-placement="top", title="Block validator", ng-click="orderTable([''], false)")
+            th
+              i.icon-thumbs-up(data-toggle="tooltip", data-placement="top", title="Block proposal", ng-click="orderTable(['stats.proposal'], false)")
             th
               i.icon-group(data-toggle="tooltip", data-placement="top", title="Peers", ng-click="orderTable(['-stats.peers'], false)")
             th

@@ -162,7 +162,7 @@ angular.module('netStatsApp.filters', [])
 })
 .filter('blockClass', function() {
 	return function(current, best) {
-		if( ! current.active)
+		if(!current || !current.active)
 			return 'text-gray';
 
 		return (best - current.block.number < 1 ? 'text-success' : (best - current.block.number === 1 ? 'text-warning' : (best - current.block.number > 1 && best - current.block.number < 4 ? 'text-orange' : 'text-danger')));
@@ -213,7 +213,7 @@ angular.module('netStatsApp.filters', [])
 })
 .filter('validatorFilter', function() {
 	return function(hash) {
-		if(typeof hash === 'undefined')
+		if(typeof hash === 'undefined' || !hash)
 			return "?";
 
 		if(hash.substr(0,2) === '0x')
@@ -224,7 +224,7 @@ angular.module('netStatsApp.filters', [])
 })
 .filter('proposerFilter', function() {
 	return function(hash) {
-		if(typeof hash === 'undefined')
+		if (typeof hash === 'undefined' || !hash)
 			return "?";
 
 		if(hash.substr(0,2) === '0x')
