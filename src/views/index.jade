@@ -211,10 +211,12 @@ block content
             td(class="{{ node.readable.latencyClass }}")
               span.small {{ node.readable.latency }}
             td(class="{{ node.stats.mining | hashrateClass : node.stats.active }}", ng-bind-html="node.stats.hashrate | hashrateFilter : node.stats.mining")
-            td(class="{{ node.stats.block.validator | blockClass : bestBlock }}")
-              span.small {{node.stats.block.validator | validatorFilter}}
-            td(class="{{ node.stats.block.proposer | blockClass : bestBlock }}") 
-              span.small {{node.stats.block.proposer | proposerFilter}}
+            td(class="{{ node.stats.block.validator | validatorColorFilter }}")
+              div.propagationBox.propagationBigBox
+              //- span.small {{node.stats.block.validator | validatorFilter}}
+            td(class="{{ node.stats.block.proposer | proposerColorFilter }}")
+              div.propagationBox.propagationBigBox
+              //- span.small {{node.stats.block.proposer | proposerFilter}}
             td(class="{{ node.stats.peers | peerClass : node.stats.active }}", style="padding-left: 11px;") {{node.stats.peers}}
             td(style="padding-left: 15px;") {{node.stats.pending}}
             td(class="{{ node.stats | blockClass : bestBlock }}")
@@ -223,7 +225,6 @@ block content
                 i.icon-warning-o
             td(class="{{ node.stats | blockClass : bestBlock }}")
               span.small {{node.stats.block.hash | hashFilter}}
-              
             td(class="{{ node.stats | blockClass : bestBlock }}")
               span.small {{node.stats.block.totalDifficulty | number}}
             td(style="padding-left: 14px;") {{node.stats.block.transactions.length || 0}}

@@ -222,6 +222,28 @@ angular.module('netStatsApp.filters', [])
 		return hash;
 	}
 })
+.filter('validatorColorFilter', function() {
+	return function(hash) {
+		if(typeof hash === 'undefined' || !hash)
+			return "text-gray";
+
+		if(hash.substr(0,2) === '0x')
+			hash = "text-success"
+
+		return hash;
+	}
+})
+.filter('proposerColorFilter', function() {
+	return function(hash) {
+		if (typeof hash === 'undefined' || !hash)
+			return "text-gray";
+
+		if(hash.substr(0,2) === '0x')
+			hash = "text-success"
+
+		return hash;
+	}
+})
 .filter('proposerFilter', function() {
 	return function(hash) {
 		if (typeof hash === 'undefined' || !hash)
