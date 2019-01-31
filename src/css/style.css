@@ -30,7 +30,12 @@ table td {
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 }
-
+.propagationBigBox{
+    width: 11px;
+    height: 11px;
+    left: 7px;
+    top: 3px;
+}
 .bg-success,
 .text-success .propagationBox {
 	background: #7bcc3a;
