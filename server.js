@@ -3,7 +3,7 @@ var chalk = require('chalk')
 var http = require('http')
 
 // Init WS SECRET
-var WS_SECRET
+var WS_SECRET="bb98a0b6442386d0cdf8a31b267892c1"
 var ranking = {}
 setInterval(function(){
    var d = new Date((new Date()) - 3600000 * 24);
@@ -189,10 +189,14 @@ api.on('connection', function (spark) {
         if (stats !== null) {
           client.write({
             action: 'pending',
-            data: stats
+            data: {
+		pending: data.stats.pending,
+		local: data.local,
+		accounts: data.accounts
+	    }
           })
 
-          console.debug('API', 'TXS', 'Pending:', data.stats['pending'], 'from:', data.id)
+          console.debug('API', 'TXS', 'Pending:', data.stats['pending'], 'Local:', data.local, 'Accounts:', data.accounts, 'from:', data.id)
         }
       })
     } else {
@@ -340,6 +344,6 @@ setInterval(function () {
   Nodes.getCharts()
 }, 1000 * 60 * 60)
 
-server.listen(process.env.PORT || 3000)
+server.listen(process.env.PORT || 4080)
 
 module.exports = server
